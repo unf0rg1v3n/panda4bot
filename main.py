@@ -24,22 +24,16 @@ async def send_welcome(message):
 async def set_notification(message):
     chat_id = message.chat.id
     msg = message.text[4:]
-    time = utils.parse_date_from_message(msg)
-    print(time)
+    delay = utils.parse_date_from_message(msg)
+    print(delay)
     msg_to_notify = msg
     print(msg_to_notify)
-    await send_reminder(chat_id, msg_to_notify, time)
+    await send_reminder(chat_id, msg_to_notify, delay)
 
 
-async def send_reminder(chat_id: int, message: str, reminder_time: datetime):
-    while True:
-        now = datetime.datetime.now().time()
-        print(f"date: {datetime}")
-        if now >= reminder_time:
-            await bot.send_message(chat_id=chat_id, text=message)
-            return
-
-        await asyncio.sleep(60)
+async def send_reminder(chat_id: int, message: str, delay: datetime):
+    await asyncio.sleep(delay)
+    await bot.send_message(chat_id=chat_id, text=message)
 
 
 async def main() -> None:
