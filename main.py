@@ -5,7 +5,6 @@ import sys
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters.command import Command
-from weather_app import fetch_weather
 
 import botconfig
 import utils
@@ -17,14 +16,8 @@ dp = Dispatcher(bot=bot)
 
 @dp.message(Command('start'))
 async def send_welcome(message):
-    text = 'use\n/remind [dd.mm.yyyy] hh:mm [message]\nto set your remind'
+    text = 'use /remind dd.mm.yyyy hh:mm to set your remind'
     await message.reply(text)
-
-
-@dp.message(Command('weather'))
-async def get_weather(message):
-    result = await fetch_weather()
-    await message.reply(text=result)
 
 
 @dp.message(Command('set'))
@@ -32,7 +25,9 @@ async def set_notification(message):
     chat_id = message.chat.id
     msg = message.text[4:]
     delay = utils.parse_date_from_message(msg)
+    print(delay)
     msg_to_notify = msg
+    print(msg_to_notify)
     await send_reminder(chat_id, msg_to_notify, delay)
 
 
@@ -43,7 +38,6 @@ async def send_reminder(chat_id: int, message: str, delay: datetime):
 
 async def main() -> None:
     await dp.start_polling(bot)
-
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
