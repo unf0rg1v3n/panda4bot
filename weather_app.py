@@ -35,7 +35,7 @@ async def fetch_weather(latitude=54.9924, longitude=73.368):
             f"Сейчас в Омске {datetime.fromtimestamp(current.Time())}\n{int(current_temperature_2m)}°C, "
             f"{get_index(daily_weather_code)}\n"
             f"Влажность воздуха составляет {current_relative_humidity_2m}%\n"
-            f"Максимальая температура сегодня составит {int(daily_temperature_2m_max)}°C, "
+            f"Максимальная температура сегодня составит {int(daily_temperature_2m_max)}°C, "
             f"минимальная {int(daily_temperature_2m_min)}°C")
 
 

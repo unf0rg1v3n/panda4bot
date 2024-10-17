@@ -1,16 +1,20 @@
 import asyncio
 import datetime
 import logging
+import os
 import sys
+import dotenv
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters.command import Command
+
 from weather_app import fetch_weather
 
-import botconfig
 import utils
 
-API_TOKEN = botconfig.get_token()
+dotenv.load_dotenv()
+
+API_TOKEN = os.getenv("BOT_TOKEN")
 bot = Bot(API_TOKEN)
 dp = Dispatcher(bot=bot)
 
